@@ -16,11 +16,11 @@
 
             </ul>
             <ul class="navbar-nav ms-auto">
-                @auth
+                @if (session()->has('login'))
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
-                            Welcome back, {{ auth()->user()->name }}
+                            Welcome back, {{ session()->get('login')['name'] }}
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="/kalkulator"><i
@@ -43,7 +43,7 @@
                                 class="bi bi-box-arrow-right"></i> Login</a>
                     </li>
                 </ul>
-            @endauth
+                @endif
         </div>
     </div>
 </nav>

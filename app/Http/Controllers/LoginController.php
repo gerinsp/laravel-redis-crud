@@ -33,18 +33,22 @@ class LoginController extends Controller
         foreach($keys as $key) {
             $user = $redis->hgetall($key);
             if($user['email'] === $credentials['email'] && Hash::check($credentials['password'], $user['password'])) {
-                $user = new User($user);
-                Auth::attempt($credentials);
                 
-                $request->session()->regenerate();
+                session()->put('login', $user);
+                session()->regenerate();
                 return redirect()->intended('/dashboard')->with('success', 'Login successfull!.');
             }
         }
         return redirect()->back()->with('loginErorr', 'Invalid email or password');
     }
 
-    public function logout()
+    public function logout(Request $request)
     {
+        session()->forget('login');
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect()->route('login');
 
     }
 }

@@ -16,7 +16,6 @@ class DashboardController extends Controller
 
     public function index()
     {
-        ddd(auth()->user());
         $redis = Redis::connection();
 
         // get all users keys
