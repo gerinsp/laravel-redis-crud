@@ -13,8 +13,10 @@ class DashboardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
+        ddd(auth()->user());
         $redis = Redis::connection();
 
         // get all users keys
