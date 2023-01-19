@@ -65,6 +65,7 @@
                     </div>
                 @enderror
             </div>
+            @if (session()->get('login')['role'] === 'admin')
             <div class="mb-3">
                 <label for="Role" class="form-label ">Role</label>
                 <select name="role" id="" class="form-select">
@@ -77,6 +78,7 @@
                         @endif
                 </select>
             </div>
+            @endif
             <button class="btn btn-primary" type="submit">Submit</button>
         </form>
     </div>

@@ -24,7 +24,9 @@
             <div class="card">
                 <div class="card-header">
                     Daftar Users
+                    @if (session()->get('login')['role'] === 'admin')
                     <a href="{{ route('dashboard.create') }}" class="btn btn-sm btn-primary">Create</a>
+                    @endif
                 </div>
                 <div class="card-body">
                     <table class="table">
@@ -51,12 +53,14 @@
                                             class="badge btn-info text-decoration-none">Lihat</a>
                                         <a href="/dashboard/{{ $user['username'] }}/edit"
                                             class="badge btn-warning text-decoration-none">Edit</span></a>
-                                        <form action="/dashboard/{{ $user['username'] }}" method="post" class="d-inline">
-                                            @method('delete')
-                                            @csrf
-                                            <button class="badge btn-danger border-0"
-                                                onclick="return confirm('Are you sure?')">Hapus</button>
-                                        </form>
+                                        @if (session()->get('login')['role'] === 'admin')
+                                            <form action="/dashboard/{{ $user['username'] }}" method="post" class="d-inline">
+                                                @method('delete')
+                                                @csrf
+                                                <button class="badge btn-danger border-0"
+                                                    onclick="return confirm('Are you sure?')">Hapus</button>
+                                            </form>
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach

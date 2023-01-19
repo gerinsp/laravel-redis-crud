@@ -119,11 +119,27 @@ class DashboardController extends Controller
         // get all users keys
         $user = $redis->hgetall('user:' . $username);
     
-        return view('dashboard.edit', [
-            'title' => 'Dashboard',
-            'active' => 'dashboard',
-            'user' => $user
-        ]);
+        $role = session()->get('login')['role'];
+
+        if($role == 'user' && $user['username'] == session()->get('login')['username']) {
+            return view('dashboard.edit', [
+                'title' => 'Dashboard',
+                'active' => 'dashboard',
+                'user' => $user
+            ]);
+        } 
+        
+        if($role == 'admin') { 
+            if($role != $user['role'] || $user['username'] == session()->get('login')['username']) { 
+                return view('dashboard.edit', [
+                    'title' => 'Dashboard',
+                    'active' => 'dashboard',
+                    'user' => $user
+                ]);
+            }
+        } 
+
+        return redirect()->back()->with('gagal', 'You dont authorize');
     }
 
     /**
