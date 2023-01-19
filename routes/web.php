@@ -20,10 +20,10 @@ Route::get('/', function() {
     return redirect('/dashboard');
 });
 
-Route::resource('/dashboard', DashboardController::class);
+Route::resource('/dashboard', DashboardController::class)->middleware('checklogin');
 
-Route::get('/login', [LoginController::class, 'index'])->name('login');
+Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('islogin');
 Route::post('/login', [LoginController::class, 'authenticate'])->name('authenticate');
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
-Route::get('/register', [RegisterController::class, 'index'])->name('register');
+Route::get('/register', [RegisterController::class, 'index'])->name('register')->middleware('islogin');
 Route::post('/register', [RegisterController::class, 'store'])->name('register.store');

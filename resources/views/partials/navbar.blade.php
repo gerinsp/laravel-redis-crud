@@ -23,11 +23,11 @@
                             Welcome back, {{ session()->get('login')['name'] }}
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="/kalkulator"><i
+                            {{-- <li><a class="dropdown-item" href="/kalkulator"><i
                                         class="bi bi-layout-text-sidebar-reverse"></i>
                                     Kalkulator</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
+                            <li> --}}
+                                {{-- <hr class="dropdown-divider"> --}}
                             </li>
                             <li>
                                 <form action="/logout" method="post">

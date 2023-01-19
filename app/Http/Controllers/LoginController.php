@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redis;
 
 class LoginController extends Controller
-{
+{   
     public function index()
     {
         return view('auth.login', [
@@ -45,8 +45,8 @@ class LoginController extends Controller
     public function logout(Request $request)
     {
         session()->forget('login');
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
+        session()->invalidate();
+        session()->regenerateToken();
 
         return redirect()->route('login');
 

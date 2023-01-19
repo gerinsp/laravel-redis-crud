@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Redis;
 
 class RegisterController extends Controller
 {
+
     public function index()
     {
         return view('auth.register', [
